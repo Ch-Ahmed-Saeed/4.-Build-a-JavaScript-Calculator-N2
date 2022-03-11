@@ -1,0 +1,109 @@
+body {
+  background: #0084b8;
+}
+#CalcMain {
+  height: 300px;
+  display: block;
+  background: #133d4b;
+  border-radius: 6px;
+  box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.19);
+  display: flex-column;
+  align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+  max-width: 336px;
+  padding: 20px 20px 5px 20px;
+  min-width: 336px;
+  height: 470px;
+}
+
+#framScr {
+  height: 60px;
+  min-height: 200px;
+  min-width: 400px;
+  background: black;
+  width: 326px;
+}
+
+#display {
+  height: 60px;
+  width: 97%;
+  margin-bottom: 4px;
+}
+
+#secDisplay{
+
+  width: 97%;
+  margin-bottom: 4px;
+}
+
+.btnsRow {
+  margin-bottom: 4px;
+}
+
+
+
+.clcbtns {
+  font-size: 16px;
+  font-weight: 700;
+  font-family: arial;
+}
+
+.clcbtns:hover {
+  background-color: brown;
+  color: #ddd;
+  transition: 0.5s ease-in-out;
+}
+
+#clear {
+  background: red;
+  height: 70px;
+  width: 164px;
+  font-size: 16px;
+  color: #fff;
+  border: 0 ;
+}
+
+
+
+.symbBtns {
+  background: #777;
+  height: 70px;
+  width: 80px;
+  color: #ddd;
+  border: 0;
+}
+
+.numBtns 
+{
+  background: #555;
+  height: 70px;
+  width: 80px;
+  color: #ddd;
+  border: 0;
+}
+
+
+#fifthRowBtnsprnt {
+  /*margin-top: -46px;*/
+}
+#equals {
+  height: 144px;
+  top: -148px;
+  position: relative;
+  right: -252px;
+
+}
+
+#zero {
+   
+  
+  height: 70px;
+  width: 80px;
+  border: 0 ;
+
+}

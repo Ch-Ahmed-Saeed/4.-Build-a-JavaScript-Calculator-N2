@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JavaScript Calculator</title>
+
+<link rel="stylesheet" type="text/css" href="style.css">
+
+
+
+</head>
+<body id="SiteBody">
+
+	<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+	
+	
+	
+
+<!-- _________________________________________________________________ -->
+
+	<div id="CalcMain"> 
+
+		<!-- <div > <iframe id="screen" id="framScr" src=""></iframe></div> -->
+
+		<input type="text" placeholder="0" id="display" id="framScr" name="">
+
+		<input type="text" placeholder="0" id="secDisplay" id="framScr" name="">
+
+		<div id="btns">
+
+
+
+<!-- _________________________________________________________________ -->
+
+			<div id="firstRowBtnsprnt" class="btnsRow">
+
+				<button id="clear" class="firstRowBtns clcbtns" onclick="Clear()"> AC </button>
+
+				<button id="divide" class="firstRowBtns clcbtns symbBtns" onclick="show('/')"> / </button>
+
+
+				<button id="multiply" class="firstRowBtns clcbtns symbBtns" onclick="show('*')"> x </button>
+
+			</div>
+
+<!-- _________________________________________________________________ -->
+
+			<div id="scndRowBtnsprnt" class="btnsRow">
+
+				<button id="seven" class="secRowBtns clcbtns numBtns" onclick="show('7')"> 7 </button>
+
+				<button id="eight" class="secRowBtns clcbtns numBtns" onclick="show('8')"> 8 </button>
+
+				<button id="nine" class="secRowBtns clcbtns numBtns" onclick="show('9')"> 9 </button>
+
+				<button id="subtract" class="secRowBtns clcbtns symbBtns" onclick="show('-')"> - </button>
+
+			</div>
+
+<!-- _________________________________________________________________ -->
+
+			<div id="thirdRowBtnsprnt" class="btnsRow">
+
+				
+
+				<button id="four" class="thirdRowBtns clcbtns numBtns" onclick="show('4')"> 4 </button>
+				<button id="five" class="thirdRowBtns clcbtns numBtns" onclick="show('5')"> 5 </button>
+				<button id="six" class="thirdRowBtns clcbtns numBtns" onclick="show('6')"> 6 </button>
+
+				<button id="add" class="thirdRowBtns clcbtns symbBtns" onclick="show('+')"> + </button>
+
+			</div>
+<!-- _________________________________________________________________ -->
+
+			<div id="forthRowBtnsprnt" class="btnsRow">
+
+				
+
+				<button id="one" class="fourthRowBtns clcbtns numBtns" onclick="show('1')"> 1 </button>
+				<button id="two" class="fourthRowBtns clcbtns numBtns" onclick="show('2')"> 2 </button>
+				<button id="three" class="fourthRowBtns clcbtns numBtns" onclick="show('3')"> 3 </button>
+
+				
+			</div>
+<!-- _________________________________________________________________ -->
+
+			<div id="fifthRowBtnsprnt" class="btnsRow">
+
+				
+
+				<button id="zero" class="fifthRowBtns clcbtns numBtns" onclick="show('0')"> 0 </button>
+				
+
+				<button id="decimal" class="fifthRowBtns clcbtns symbBtns" onclick="show('decimal')" > . </button>
+
+				<button id="negative-value" class="fifthRowBtns clcbtns symbBtns" onclick="show('negative-value')" > +/- </button>
+
+			</div>
+
+<!-- _________________________________________________________________ -->
+
+			<div id="sixthEqualRow" class="btnsRow">
+
+			<button id="equals" class="sixthRowBtns clcbtns symbBtns" onclick="; show('equals')"> = </button>
+
+			</div>
+
+<!-- _________________________________________________________________ -->
+
+
+
+		</div>
+
+	</div>
+<!-- _________________________________________________________________ -->
+
+
+<script  type="text/javascript" >
+
+// _____________________________________________________________
+
+// By Useful programmer and added regex for decimal:
+
+	//Showing number on display function:
+
+//----------------------------------------------------------------
+
+	let outPutScreen = document.getElementById("display");
+
+	let operationOptions = ["+", "-", "*", "/", ];
+
+	let myTrailingResult = 0;
+
+	let myWorkingOperation = "";
+
+	function show(myNum){
+
+		let outPutScreen = document.getElementById("display");
+		let secondOutPut = document.getElementById("secDisplay");
+
+
+				if (outPutScreen.value === "0" && operationOptions.indexOf(myNum) === -1 ) {
+
+					console.log("starting")
+				
+					if (myNum === "decimal") {
+
+						outPutScreen.value = "0."
+					} 
+					else if (myNum === "negative-value") {
+
+				      if (display.innerHTML.indexOf("-1") === -1) {
+				        display.innerHTML = "-" + display.innerHTML
+				      } 
+
+				      else if (display.innerHTML.indexOf("-1" > -1)) {
+				        display.innerHTML = display.innerHTML.slice(1, display.innerHTML.length);
+				      }
+
+    				} else {
+							outPutScreen.value = myNum;
+
+						 }	
+
+				} 
+
+				else if (operationOptions.indexOf(myNum) >= 0) {
+
+					console.log(outPutScreen.value, "<= myTrailingResult ");
+					console.log("dealing with an opertion");
+
+					 if (myTrailingResult === outPutScreen.value) {
+
+						console.log("double operand types")
+						myWorkingOperation = myNum;
+					}
+
+					else if (myWorkingOperation === "") {
+
+						// dealing without operand:
+
+						myWorkingOperation = myNum;
+						console.log(myWorkingOperation);
+
+
+						myTrailingResult = outPutScreen.value
+						console.log(myTrailingResult, "<= myTrailingResult ");
+
+						secondOutPut.value = myTrailingResult;
+
+						outPutScreen.value = 0;	
+
+
+					// outPutScreen.value += myNum;
+
+					}
+
+					
+					else {
+
+						// 	// dealing with operand:
+
+						console.log("now having operand");
+
+						myTrailingResult = Calculate(outPutScreen.value, myTrailingResult, myWorkingOperation);
+						console.log(myTrailingResult, "<= myTrailingResult ");
+
+						secondOutPut.value = myTrailingResult;
+
+						outPutScreen.value = 0;
+						console.log(outPutScreen.value, "<= outPutScreen.value ");
+
+						myWorkingOperation = myNum;
+						console.log(myWorkingOperation);
+
+				
+
+					}
+
+					
+
+				}
+				else if (myNum === "equals") {
+
+					
+
+					// outPutScreen.value = parseFloat(myTrailingResult) + parseFloat(outPutScreen.value);
+
+					outPutScreen.value = Calculate(outPutScreen.value, myTrailingResult, myWorkingOperation)
+// 
+	
+					myTrailingResult = 0;
+
+					myWorkingOperation = "";	
+
+					secondOutPut.value = myTrailingResult;
+
+				}
+
+
+
+				else if (myNum === "decimal") {
+
+
+
+						console.log("deciaml clicked")
+						
+
+						if (outPutScreen.value.indexOf(".") === -1) {
+						      outPutScreen.value += ".";
+						    }
+
+							// else {
+							// outPutScreen.value += ".";
+							// 	console.log("not last")
+							// }
+						
+						
+				
+
+				 }
+
+				 else if (myNum === "negative-value") {
+
+				 	if (outPutScreen.value.indexOf("-1") === -1) {
+
+						console.log("negative-value clicked");
+
+						outPutScreen.value = "-" + outPutScreen.value;
+
+					}	
+					else if (outPutScreen.value.indexOf("-1" > -1)) {
+
+						console.log("non negative-value clicked")
+
+						outPutScreen.value = outPutScreen.value.slice(1, outPutScreen.value.length)
+
+					}
+
+				} else {
+
+						outPutScreen.value += myNum; 
+
+						console.log(typeof myNum); }
+
+				console.log(myTrailingResult, "<= myTrailingResult ", outPutScreen.value, "<= outPutScreen.value", myWorkingOperation, "<= myWorkingOperation");		
+
+	}
+
+
+// _____________________________________________________________
+
+// _____________________________________________________________
+
+// By Useful programmer me:
+
+	//Showing number on display function:
+
+//----------------------------------------------------------------
+
+	// let outPutScreen = document.getElementById("display");
+
+
+	// let operationOptions = ["+", "-", "*", "/", ];
+
+	// function show(myNum){
+
+	// 	let outPutScreen = document.getElementById("display");
+
+
+	// 			if (outPutScreen.value === "0" && operationOptions.indexOf(myNum) === -1 ) {
+				
+	// 				if (myNum === "decimal") {
+
+	// 					outPutScreen.value = "0."
+	// 				} 
+	// 				else {
+	// 						outPutScreen.value = myNum;
+
+	// 					 }	
+
+	// 			} 
+
+	// 			else if (myNum === "decimal") {
+
+	// 					console.log("deciaml clicked")
+						
+
+	// 					if (outPutScreen.value.indexOf(".") === -1) {
+ //     							 outPutScreen.value += ".";
+	// 						console.log("check the decimal dude");	
+	// 					}
+	// 					else {
+	// 						outPutScreen.value += ".";
+	// 					}
+						
+	// 					console.log("deciaml skipped because already in number.");
+				
+
+	// 			} else {
+
+	// 					outPutScreen.value += myNum;
+	// 					console.log(typeof myNum);
+	// 				}
+
+	// }
+
+
+// _____________________________________________________________
+
+// _____________________________________________________________
+
+	
+
+// FUnction to calculate:
+
+	function Calculate(screenVal, mTresult, operan){
+
+		let myReslut;
+
+
+				if (operan == "+") {
+
+					myReslut = parseFloat(mTresult) + parseFloat(screenVal) ;
+				}
+
+				else if (operan == "-") {
+
+					myReslut =  parseFloat(mTresult) - parseFloat(screenVal) ;
+				}
+				else if (operan == "*") {
+
+					myReslut =  parseFloat(mTresult) * parseFloat(screenVal) ;
+				}
+				else if (operan == "/") {
+
+					myReslut =  parseFloat(mTresult) / parseFloat(screenVal) ;
+				}
+
+				return myReslut;
+		
+	}
+
+
+ // __________________________________________________________________________
+
+// _____________________________________________________________
+
+	
+
+// FUnction to calculate:
+
+	// function Calculate(){
+
+	// 	let outPutScreen = document.getElementById("display";
+
+	// 	outPutScreen.value = eval(outPutScreen.value);
+		
+	// }
+
+
+
+
+
+
+ // __________________________________________________________________________
+
+
+	function Clear() {
+
+		let outPutScreen = document.getElementById("display");
+		let secondOutPut = document.getElementById("secDisplay");
+		
+
+		outPutScreen.value = "0";
+		myTrailingResult = "0";
+		secondOutPut.value = "0";
+
+			}
+			
+
+
+
+
+
+ // __________________________________________________________________________
+
+
+ 
+
+</script>
+
+</body>
+</html>
